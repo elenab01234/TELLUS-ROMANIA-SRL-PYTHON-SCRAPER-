@@ -1,1 +1,1 @@
-"""E-INFRA Python scraper package."""
+"""CALLPOINT NEW EUROPE SRL (eJobs) Python scraper package."""

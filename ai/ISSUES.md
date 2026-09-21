@@ -1,6 +1,6 @@
 # Issues
 
-Acest proiect folosește [GitHub Issues](https://github.com/ale23yfm/e-infra-sa-python-scraper/issues) pentru a urmări munca.
+Acest proiect folosește [GitHub Issues](https://github.com/elenab01234/TELLUS-ROMANIA-SRL-PYTHON-SCRAPER-/issues) pentru a urmări munca.
 
 ## Regulă
 
@@ -19,7 +19,7 @@ Excepții:
 
 ## Issue-uri deschise
 
-Vezi [toate issue-urile](https://github.com/ale23yfm/e-infra-sa-python-scraper/issues).
+Vezi [toate issue-urile](https://github.com/elenab01234/TELLUS-ROMANIA-SRL-PYTHON-SCRAPER-/issues).
 
 ## Common issues
 
@@ -34,4 +34,4 @@ Vezi [toate issue-urile](https://github.com/ale23yfm/e-infra-sa-python-scraper/i
 ## Escalation
 
 For peviitor API problems, contact the peviitor maintainers with the CIF
-`38647188` and the failing endpoint.
+`21147668` and the failing endpoint.

@@ -2,11 +2,11 @@
 
 ## Project Purpose
 
-This scraper extracts job listings for **E-INFRA S.A.** (CIF `38647188`)
-from the group's applytojob board, filtered by the `E-INFRA` department,
+This scraper extracts job listings for **CALLPOINT NEW EUROPE SRL** (CIF `21147668`)
+from the group's applytojob board, filtered by the `CALLPOINT NEW EUROPE` department,
 and publishes them to peviitor.ro via the v1 API (`https://api.peviitor.ro/v1`).
 
-Target: `https://electrogrup.applytojob.com/apply/jobs/?department=E-INFRA`
+Target: `https://www.ejobs.ro/apply/jobs/?department=CALLPOINT NEW EUROPE`
 
 ## Model Schemas
 
@@ -46,13 +46,13 @@ When working on this scraper:
 
 ## Workflow Steps
 
-1. **Start with brand** — `E-INFRA`
-2. **Search in ANAF/CUIScan** — find company by CIF `38647188`
+1. **Start with brand** — `CALLPOINT NEW EUROPE`
+2. **Search in ANAF/CUIScan** — find company by CIF `21147668`
 3. **Get company details from ANAF** — fetch full company data via CUIScan → demoanaf → cache
 4. **Validate with Peviitor** — verify company exists in peviitor
 5. **Check existing jobs** — query peviitor v1 API by CIF to see what jobs exist
 6. **Check company status** — if ANAF status = INACTIVE → DELETE existing jobs and STOP
-7. **Scrape new jobs** — parse the E-INFRA applytojob board (department filter)
+7. **Scrape new jobs** — parse the CALLPOINT NEW EUROPE applytojob board (department filter)
 8. **Transform for API** — validate and fix job data:
    - location: only Romanian cities allowed (fallback `["România"]`)
    - workmode: `remote` / `on-site` / `hybrid`
@@ -79,7 +79,7 @@ When running `python3 -m scraper.index`, the following steps happen automaticall
 1. **Check existing jobs count** — query peviitor v1 API by CIF (read-only)
 2. **Validate company via ANAF** — check company exists and is active
 3. **Upsert company core** — with `scraperFile` pointing to our workflow
-4. **Scrape jobs** — parse the E-INFRA applytojob board
+4. **Scrape jobs** — parse the CALLPOINT NEW EUROPE applytojob board
 5. **Merge ANOFM jobs** — unless `--test`
 6. **Transform for API** — fix locations (only Romanian cities), normalize workmode
 7. **Generate files** — `scraper/jobs.json`, `docs/jobs.md`, `docs/company.json`
@@ -105,7 +105,7 @@ company.py / anaf.py (validate company)
     ├── anaf_cache.json ──► fallback if APIs fail
     │
     ▼ (if active)
-scrape applytojob board (?department=E-INFRA)
+scrape applytojob board (?department=CALLPOINT NEW EUROPE)
     │
     ▼
 transform_jobs_for_solr()
@@ -145,7 +145,7 @@ See `ai/files.md` for the full file map. Key files:
 
 ## API Endpoints
 
-- **Applytojob board**: `https://electrogrup.applytojob.com/apply/jobs/?department=E-INFRA` — listing HTML
+- **Applytojob board**: `https://www.ejobs.ro/apply/jobs/?department=CALLPOINT NEW EUROPE` — listing HTML
 - **ANOFM search**: `https://mediere.anofm.ro/api/entity/vw_public_job_posting` — POST by `employer_tax_code`
 - **CUIScan**: `https://cuiscan.ro/api.php?action=company&cui=CIF` — company details fallback
 - **DemoANAF**: `https://demoanaf.ro/api/company/:cui` — company details fallback
@@ -185,12 +185,12 @@ python3 -m scraper.index --test
 # Query jobs in peviitor by CIF (read-only verify; add --delete to remove
 # invalid board URLs — deletion is scoped to the applytojob board prefix,
 # so jobs from other scrapers under a shared CIF are never touched)
-python3 -m scraper.api 38647188
+python3 -m scraper.api 21147668
 
 # Validate job URLs from peviitor by CIF (head/content/browser)
-python3 -m scraper.validate_jobs 38647188 --mode head
-python3 -m scraper.validate_jobs 38647188 --mode content --dry-run
-python3 -m scraper.validate_jobs 38647188 --mode content --delete
+python3 -m scraper.validate_jobs 21147668 --mode head
+python3 -m scraper.validate_jobs 21147668 --mode content --dry-run
+python3 -m scraper.validate_jobs 21147668 --mode content --delete
 ```
 
 ## Testing

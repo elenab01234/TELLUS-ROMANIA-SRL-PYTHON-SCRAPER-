@@ -8,11 +8,11 @@ from scraper import anaf
 def test_get_company_from_anaf_cuiscan_first(mock_get):
     mock_get.side_effect = [
         mock.Mock(status_code=200, json=lambda: {
-            "denumire": "E-INFRA S.A.", "cui": "38647188",
-            "adresa": "CLUJ-NAPOCA", "activ": True}),
+            "denumire": "CALLPOINT NEW EUROPE SRL", "cui": "21147668",
+            "adresa": "MUNICIPIUL BUCURESTI, SECTOR 6", "activ": True}),
     ]
-    company = anaf.get_company_from_anaf("38647188")
-    assert company["denumire"] == "E-INFRA S.A."
+    company = anaf.get_company_from_anaf("21147668")
+    assert company["denumire"] == "CALLPOINT NEW EUROPE SRL"
     assert company["stareInregistrare"] == "INREGISTRAT"
 
 
@@ -20,11 +20,11 @@ def test_get_company_from_anaf_demoanaf_fallback(mock_get):
     mock_get.side_effect = [
         mock.Mock(status_code=500, raise_for_status=mock.Mock(side_effect=Exception("http"))),
         mock.Mock(status_code=200, json=lambda: {
-            "denumire": "E-INFRA S.A.", "cif": "38647188",
-            "adresa": "CLUJ-NAPOCA", "stareInregistrare": "INREGISTRAT"}),
+            "denumire": "CALLPOINT NEW EUROPE SRL", "cif": "21147668",
+            "adresa": "MUNICIPIUL BUCURESTI, SECTOR 6", "stareInregistrare": "INREGISTRAT"}),
     ]
-    company = anaf.get_company_from_anaf("38647188")
-    assert company["denumire"] == "E-INFRA S.A."
+    company = anaf.get_company_from_anaf("21147668")
+    assert company["denumire"] == "CALLPOINT NEW EUROPE SRL"
     assert company["stareInregistrare"] == "INREGISTRAT"
 
 
@@ -32,16 +32,16 @@ def test_get_company_from_anaf_skips_payment_error(mock_get):
     mock_get.side_effect = [
         mock.Mock(status_code=200, json=lambda: {"error": "payment_required", "accepts": []}),
         mock.Mock(status_code=200, json=lambda: {
-            "denumire": "E-INFRA S.A.", "cui": "38647188",
-            "adresa": "CLUJ-NAPOCA", "activ": True}),
+            "denumire": "CALLPOINT NEW EUROPE SRL", "cui": "21147668",
+            "adresa": "MUNICIPIUL BUCURESTI, SECTOR 6", "activ": True}),
     ]
-    company = anaf.get_company_from_anaf("38647188")
-    assert company["denumire"] == "E-INFRA S.A."
+    company = anaf.get_company_from_anaf("21147668")
+    assert company["denumire"] == "CALLPOINT NEW EUROPE SRL"
 
 
 def test_get_company_from_anaf_returns_none_on_total_failure(mock_get):
     mock_get.side_effect = Exception("network")
-    assert anaf.get_company_from_anaf("38647188") is None
+    assert anaf.get_company_from_anaf("21147668") is None
 
 
 def test_search_anofm_parses_rows(mock_post):
@@ -50,7 +50,7 @@ def test_search_anofm_parses_rows(mock_post):
         {"id": "1", "occupation": "Inginer", "address_locality_name": "Cluj > Cluj-Napoca"},
         {"id": "2", "occupation": "Electrician", "address_locality_name": "Bucuresti > Bucuresti"},
     ]}
-    jobs = anaf.search_anofm("38647188")
+    jobs = anaf.search_anofm("21147668")
     assert len(jobs) == 2
     assert jobs[0]["url"].endswith("/job/1")
     assert jobs[0]["title"] == "Inginer"
@@ -59,12 +59,12 @@ def test_search_anofm_parses_rows(mock_post):
 
 def test_search_anofm_empty_on_error(mock_post):
     mock_post.side_effect = Exception("network")
-    assert anaf.search_anofm("38647188") == []
+    assert anaf.search_anofm("21147668") == []
 
 
 def test_search_anofm_non_200(mock_post):
     mock_post.return_value.status_code = 500
-    assert anaf.search_anofm("38647188") == []
+    assert anaf.search_anofm("21147668") == []
 
 
 def test_validate_and_get_company_falls_back_to_config(monkeypatch, company_config):

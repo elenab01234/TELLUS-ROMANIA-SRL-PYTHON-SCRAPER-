@@ -80,7 +80,7 @@
 ## Notes
 
 - All operations go through the peviitor v1 API — no direct Solr access.
-- CIF `38647188` is shared with other peviitor scrapers; stale-deletion is
+- CIF `21147668` is shared with other peviitor scrapers; stale-deletion is
   scoped to the applytojob board prefix only.
-- Full workflow: validate company (ANAF) → scrape E-INFRA board → merge
+- Full workflow: validate company (ANAF) → scrape CALLPOINT NEW EUROPE board → merge
   ANOFM → transform → upsert → delete stale → generate `docs/jobs.md`.

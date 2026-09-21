@@ -39,13 +39,13 @@ config when available.
 
 ```json
 {
-  "id": "38647188",
-  "company": "E-INFRA S.A.",
-  "brand": "E-INFRA",
+  "id": "21147668",
+  "company": "CALLPOINT NEW EUROPE SRL",
+  "brand": "CALLPOINT NEW EUROPE",
   "status": "activ",
   "location": ["Bucuresti"],
-  "website": ["https://e-infra.ro"],
-  "career": ["https://e-infra.ro/careers/"],
-  "scraperFile": "https://github.com/ale23yfm/e-infra-sa-python-scraper/actions/workflows/job-seeker-ro-spider.yml"
+  "website": ["https://www.telusdigital.com"],
+  "career": ["https://www.telusdigital.com/careers/"],
+  "scraperFile": "https://github.com/elenab01234/TELLUS-ROMANIA-SRL-PYTHON-SCRAPER-/actions/workflows/job-seeker-ro-spider.yml"
 }
 ```

@@ -5,7 +5,7 @@
 Before any work, check open issues and fix them:
 
 ```bash
-gh issue list --repo ale23yfm/e-infra-sa-python-scraper --state open
+gh issue list --repo elenab01234/TELLUS-ROMANIA-SRL-PYTHON-SCRAPER- --state open
 ```
 
 Prioritize `critical` → `bug` → `enhancement` → `documentation`. For each
@@ -24,8 +24,8 @@ appropriate, and move on.
 - Validate job URLs periodically:
 
 ```bash
-python3 -m scraper.validate_jobs 38647188 --mode content --dry-run
-python3 -m scraper.validate_jobs 38647188 --mode content --delete
+python3 -m scraper.validate_jobs 21147668 --mode content --dry-run
+python3 -m scraper.validate_jobs 21147668 --mode content --delete
 ```
 
 ## Board structure changes
@@ -33,7 +33,7 @@ python3 -m scraper.validate_jobs 38647188 --mode content --delete
 If `parse_api_jobs` returns 0 or few jobs, inspect the applytojob page:
 
 ```bash
-curl -s "https://electrogrup.applytojob.com/apply/jobs/?department=E-INFRA"
+curl -s "https://www.ejobs.ro/apply/jobs/?department=CALLPOINT NEW EUROPE"
 ```
 
 Update the parser selectors in `scraper/index.py` (`a.job_title_link`,

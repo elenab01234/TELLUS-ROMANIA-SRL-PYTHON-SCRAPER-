@@ -3,7 +3,7 @@
 The scraper uses `User-Agent: job_seeker_ro_spider` and only requests public
 job listing/detail pages from:
 
-- `https://electrogrup.applytojob.com`
+- `https://www.ejobs.ro`
 - `https://mediere.anofm.ro`
 - `https://api.peviitor.ro`
 - `https://demoanaf.ro`, `https://cuiscan.ro`, `https://www.cuifirma.ro`

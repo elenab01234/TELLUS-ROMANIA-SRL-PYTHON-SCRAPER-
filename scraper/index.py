@@ -1,9 +1,10 @@
 """
-E-INFRA S.A. applytojob Scraper — derived from the ELECTROGRUP Python template.
+CALLPOINT NEW EUROPE SRL eJobs Scraper — derived from the ELECTROGRUP Python template.
 
-Scrapes E-INFRA job listings from the group applytojob board (electrogrup.applytojob.com) filtered by
-department, validates the company via ANAF, and publishes jobs/company data
-to peviitor.ro through the v1 API (api.peviitor.ro/v1) — no direct Solr access.
+Scrapes CALLPOINT NEW EUROPE SRL (TELUS Digital) job listings from the employer page
+on eJobs.ro (www.ejobs.ro/company/telus-digital/45016), validates the company via ANAF,
+and publishes jobs/company data to peviitor.ro through the v1 API (api.peviitor.ro/v1)
+— no direct Solr access.
 """
 
 import datetime
@@ -12,6 +13,7 @@ import pathlib
 import re
 import sys
 import time
+from urllib.parse import urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -22,87 +24,170 @@ from .company import validate_and_get_company
 from .config import company_config, scraper_config
 from .markdown_generator import generate_jobs_markdown
 
-TIMEOUT = 10
-HEADERS = {"User-Agent": "job_seeker_ro_spider"}
+TIMEOUT = 20
+HEADERS = {"User-Agent": (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+)}
 
 COMPANY_CIF = company_config["id"]
 API_BASE = scraper_config["apiBase"]
 API_PATH = scraper_config["apiPath"]
-DEPARTMENT = scraper_config["department"]
 
 COMPANY_NAME = None
 
 # Jobs stored in SOLR under this CIF may be published by other peviitor
 # scrapers (aggregators). Stale deletion must only ever touch jobs that this
-# scraper itself published (i.e. URLs on the group's applytojob board), so we
-# scope it to this prefix instead of the whole CIF.
-JOB_DETAILS_PREFIX = f"{API_BASE}/apply/jobs/details/"
+# scraper itself published (i.e. eJobs job detail URLs), so we scope it to
+# this prefix instead of the whole CIF.
+JOB_DETAILS_PREFIX = scraper_config["jobDetailsPrefix"]
+
+# eJobs marks foreign-location listings (e.g. relocation roles) with the
+# "Străinătate" prefix inside the card body. Such jobs are not valid for the
+# Romanian peviitor board and are skipped during parsing.
+_FOREIGN_MARKERS = (
+    "străinătate",
+    "strainatate",
+    "bulgaria",
+    "sofia",
+    "spania",
+    "italia",
+    "franta",
+    "germania",
+    "grecia",
+    "ungaria",
+    "olanda",
+    "polonia",
+    "cehia",
+    "slovacia",
+    "irlanda",
+)
+
+_REMOTE_MARKERS = (
+    "lucru de acasă",
+    "lucru de acasa",
+    "work from home",
+    "remote",
+    "la distanță",
+    "la distanta",
+)
+
+_HYBRID_MARKERS = (
+    "hibrid",
+    "hybrid",
+)
 
 
 def build_listing_url():
-    """Builds the applytojob listing URL with the company department filter."""
-    return f"{API_BASE}{API_PATH}/?department={DEPARTMENT}"
+    """Builds the eJobs employer page URL (https://www.ejobs.ro/company/...)."""
+    return f"{API_BASE}{API_PATH}"
 
 
-def build_job_url(job_id):
-    """Builds the canonical job detail URL (no query string)."""
-    return f"{API_BASE}/apply/jobs/details/{job_id}"
+def make_absolute(url):
+    """Turns a relative eJobs URL into an absolute one."""
+    if url.startswith("http://") or url.startswith("https://"):
+        return url
+    return urljoin(API_BASE, url)
+
+
+def job_id_from_url(url):
+    """Extracts the numeric job id from an eJobs job detail URL.
+
+    Only `/user/locuri-de-munca/<slug>/<id>` URLs are matched, so company or
+    other board URLs never produce a (wrong) job id.
+    """
+    m = re.search(r"/user/locuri-de-munca/[^/]+/(\d+)/?$", url)
+    return m.group(1) if m else None
 
 
 def extract_location(location_text):
-    """Extracts the city from a location string like 'Bucuresti, Bucuresti, Romania'."""
+    """Extracts the city from an eJobs location string like 'Bucuresti' or
+    'Bucuresti, Ilfov'. Remote markers map to 'România'."""
     if not location_text:
         return []
-    first = location_text.split(",")[0].strip()
+    text = location_text.strip()
+    if not text:
+        return []
+    lower = text.lower()
+    if any(mark in lower for mark in _REMOTE_MARKERS):
+        return ["România"]
+    first = text.split(",")[0].strip()
     if not first:
         return []
-    if first.lower() in ("romania", "românia", "romania -"):
+    if first.lower() in ("romania", "românia"):
         return ["România"]
     return [first]
 
 
+def detect_workmode(card_text):
+    """Detects remote/hybrid work mode from the card body text."""
+    if not card_text:
+        return None
+    lower = card_text.lower()
+    if any(mark in lower for mark in _REMOTE_MARKERS):
+        return "remote"
+    if any(mark in lower for mark in _HYBRID_MARKERS):
+        return "hybrid"
+    return None
+
+
+def _is_foreign(text):
+    """True when a location/card text refers to a position outside Romania."""
+    lower = (text or "").lower()
+    return any(marker in lower for marker in _FOREIGN_MARKERS)
+
+
 def parse_api_jobs(html):
-    """Parses the applytojob board HTML into raw job dicts."""
+    """Parses the eJobs employer page HTML into raw job dicts.
+
+    Only Romanian-located jobs are kept; relocation/foreign listings are
+    skipped. Duplicate job ids are collapsed.
+    """
     soup = BeautifulSoup(html, "html.parser")
     jobs = []
     seen_ids = set()
 
-    for link in soup.find_all("a", class_="job_title_link"):
-        href = link.get("href") or ""
-        m = re.search(r"/details/([^/?]+)", href)
-        if not m:
+    for card in soup.select(".job-card-wrapper"):
+        link = card.select_one(".job-card-content-middle__title a")
+        if not link:
             continue
-        job_id = m.group(1)
-        if job_id in seen_ids:
+        href = (link.get("href") or "").strip()
+        if not href:
             continue
-        seen_ids.add(job_id)
+        url = make_absolute(href)
+        job_id = job_id_from_url(url)
+        if job_id and job_id in seen_ids:
+            continue
 
         title = link.get_text(strip=True)
+
+        card_text = card.get_text(" ", strip=True)
+        if _is_foreign(f"{card_text} {title}"):
+            continue
+
         location = "România"
+        info_divs = card.select("div.job-card-content-middle__info")
+        if info_divs:
+            location = info_divs[-1].get_text(" ", strip=True) or location
 
-        row = link.find_parent("tr")
-        if row:
-            cells = row.find_all("td")
-            if len(cells) > 1:
-                location = cells[1].get_text(strip=True) or location
-        else:
-            loc_tag = link.find_parent("div", class_="row_job")
-            if loc_tag:
-                span = loc_tag.find("span", class_="resumator_description")
-                if span and "Location:" in span.get_text():
-                    location = span.get_text().replace("Location:", "").strip()
-
-        jobs.append({
-            "url": build_job_url(job_id),
+        raw = {
+            "url": url,
             "title": title,
             "location": extract_location(location),
-        })
+        }
+        workmode = detect_workmode(f"{title} {location}")
+        if workmode:
+            raw["workmode"] = workmode
+
+        if job_id:
+            seen_ids.add(job_id)
+        jobs.append(raw)
 
     return jobs
 
 
 def fetch_listing():
-    """Fetches the board HTML for the company department."""
+    """Fetches the eJobs employer page HTML."""
     url = build_listing_url()
     res = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
     if res.status_code != 200:
@@ -197,7 +282,7 @@ def transform_jobs_for_solr(payload):
 
 
 def scrape_all_listings():
-    """Fetches and parses all jobs for the company department."""
+    """Fetches and parses all jobs on the eJobs employer page."""
     html = fetch_listing()
     return parse_api_jobs(html)
 
@@ -243,7 +328,7 @@ def main(root=None):
 
     raw_jobs = scrape_all_listings()
     scraped_count = len(raw_jobs)
-    print(f"Jobs scraped from the E-INFRA applytojob board: {scraped_count}")
+    print(f"Jobs scraped from the eJobs employer page: {scraped_count}")
 
     if not test_only_one_page:
         anofm_jobs = search_anofm(validated["cif"])
@@ -258,7 +343,7 @@ def main(root=None):
     jobs = [map_to_job_model(job, validated["cif"]) for job in raw_jobs]
 
     payload = {
-        "source": "electrogrup.applytojob.com",
+        "source": "www.ejobs.ro",
         "scrapedAt": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "company": COMPANY_NAME,
         "cif": validated["cif"],
@@ -323,7 +408,7 @@ def main(root=None):
     final_result = query_solr(COMPANY_CIF)
     print(f"\n=== SUMMARY ===")
     print(f"Jobs existing in SOLR before scrape: {existing_count}")
-    print(f"Jobs scraped from the E-INFRA applytojob board: {scraped_count}")
+    print(f"Jobs scraped from the eJobs employer page: {scraped_count}")
     print(f"Stale jobs attempted: {len(stale_urls)}")
     print(f"Jobs in SOLR after scrape: {final_result['numFound']}")
     print(f"====================")

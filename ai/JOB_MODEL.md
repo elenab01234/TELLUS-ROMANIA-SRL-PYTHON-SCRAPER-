@@ -49,10 +49,10 @@ Standardized job document published to peviitor SOLR.
 
 ```json
 {
-  "url": "https://electrogrup.applytojob.com/apply/jobs/details/bClwIJnZdv",
+  "url": "https://www.ejobs.ro/apply/jobs/details/bClwIJnZdv",
   "title": "Inginer Ofertare Energetic",
-  "company": "E-INFRA S.A.",
-  "cif": "38647188",
+  "company": "CALLPOINT NEW EUROPE SRL",
+  "cif": "21147668",
   "location": ["Bucuresti"],
   "workmode": "on-site",
   "date": "2026-08-03T00:00:00Z",

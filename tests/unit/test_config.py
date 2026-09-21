@@ -30,9 +30,9 @@ def test_company_config_id_is_numeric(company_config):
 
 
 def test_scraper_config_shape(scraper_config):
-    assert scraper_config["apiBase"] == "https://electrogrup.applytojob.com"
-    assert scraper_config["apiPath"] == "/apply/jobs"
-    assert scraper_config["department"]
+    assert scraper_config["apiBase"] == "https://www.ejobs.ro"
+    assert scraper_config["apiPath"] == "/company/telus-digital/45016"
+    assert scraper_config["employerId"] == "45016"
 
 
 def test_configs_are_json_files():

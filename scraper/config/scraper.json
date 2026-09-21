@@ -1,6 +1,6 @@
 {
-  "apiBase": "https://electrogrup.applytojob.com",
-  "apiPath": "/apply/jobs",
-  "department": "E-INFRA",
-  "jobDetailsPrefix": "https://electrogrup.applytojob.com/apply/jobs/details/"
+  "apiBase": "https://www.ejobs.ro",
+  "apiPath": "/company/telus-digital/45016",
+  "employerId": "45016",
+  "jobDetailsPrefix": "https://www.ejobs.ro/user/locuri-de-munca/"
 }

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.1.0] - 2026-09-21
+
+### Changed
+- Re-targeted the scraper from E-INFRA S.A. (applytojob) to **CALLPOINT NEW EUROPE SRL** (TELUS Digital) on **eJobs.ro** (company id `45016`, CIF `21147668`).
+- `scraper/config/company.json` now holds the CALLPOINT NEW EUROPE identity.
+- `scraper/config/scraper.json` describes the eJobs employer page (apiBase/apiPath/employerId/jobDetailsPrefix).
+- `scraper/index.py` parser rewritten for the eJobs SSR employer page: browser-like User-Agent, `job-card-wrapper` cards, dedupe by job id, filtering of foreign/relocation listings, and remote listings mapped to `România` with a `remote` work mode.
+- Stale-job deletion is now scoped to the eJobs board prefix (`/user/locuri-de-munca/`).
+- Tests, README, docs, and GitHub Pages updated for the new company and source.
+
 ## [1.0.0] - 2026-08-03
 
 ### Added

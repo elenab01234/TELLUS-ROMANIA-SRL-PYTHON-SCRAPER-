@@ -1,46 +1,28 @@
-# E-INFRA S.A.
+# CALLPOINT NEW EUROPE SRL
 
 ## Company Info
 
 | Field | Value |
 |-------|-------|
-| CIF | 38647188 |
-| Brand | E-INFRA |
-| Website | https://e-infra.ro |
-| Career | https://e-infra.ro/careers/ |
+| CIF | 21147668 |
+| Brand | CALLPOINT NEW EUROPE |
+| Website | https://www.telusdigital.com/ |
+| Career | https://www.ejobs.ro/company/telus-digital/45016 |
 | LastScraped | 2026-09-21 |
 
-## Jobs (5)
+## Jobs (2)
 
-### Economist (Contract pe perioada determinata – 2 ani - on-site)
+### Level 2 Customer Support Agent
 
-- **URL**: [https://electrogrup.applytojob.com/apply/jobs/details/oGtJRnEtGr](https://electrogrup.applytojob.com/apply/jobs/details/oGtJRnEtGr)
-- **Location**: Cluj-Napoca
+- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/level-customer-support-agent/1984170](https://www.ejobs.ro/user/locuri-de-munca/level-customer-support-agent/1984170)
+- **Location**: București
 - **Status**: scraped
 
-### Learning & Development Specialist (L&D) - on site
+### Danish Customer Support Representative
 
-- **URL**: [https://electrogrup.applytojob.com/apply/jobs/details/Eju5zWOJyQ](https://electrogrup.applytojob.com/apply/jobs/details/Eju5zWOJyQ)
-- **Location**: Bucharest
-- **Status**: scraped
-
-### SCADA Network & Cybersecurity Engineer
-
-- **URL**: [https://electrogrup.applytojob.com/apply/jobs/details/bvv1tky7Ih](https://electrogrup.applytojob.com/apply/jobs/details/bvv1tky7Ih)
-- **Location**: Bucuresti
-- **Status**: scraped
-
-### SCADA Network & Cybersecurity Engineer
-
-- **URL**: [https://electrogrup.applytojob.com/apply/jobs/details/5PA7JOcQ6d](https://electrogrup.applytojob.com/apply/jobs/details/5PA7JOcQ6d)
-- **Location**: Cluj-Napoca
-- **Status**: scraped
-
-### Specialist Senior IT Security Operations
-
-- **URL**: [https://electrogrup.applytojob.com/apply/jobs/details/A5rIZj12Ty](https://electrogrup.applytojob.com/apply/jobs/details/A5rIZj12Ty)
-- **Location**: BUCURESTI
+- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/danish-customer-support-representative/1981786](https://www.ejobs.ro/user/locuri-de-munca/danish-customer-support-representative/1981786)
+- **Location**: București
 - **Status**: scraped
 
 ---
-_Generated at 2026-09-21T12:36:52Z_
+_Generated at 2026-09-21T15:30:27Z_

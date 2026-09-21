@@ -9,7 +9,7 @@ import scraper.api as api
 def test_query_solr_returns_docs(mock_get):
     mock_get.return_value.status_code = 200
     mock_get.return_value.json.return_value = {"success": True, "total": 2, "data": [{"url": "u1"}]}
-    result = api.query_solr("38647188")
+    result = api.query_solr("21147668")
     assert result["numFound"] == 2
     assert result["docs"] == [{"url": "u1"}]
 
@@ -18,13 +18,13 @@ def test_query_solr_throws_on_http_error(mock_get):
     mock_get.return_value.status_code = 500
     mock_get.return_value.text = "boom"
     with pytest.raises(RuntimeError, match="500"):
-        api.query_solr("38647188")
+        api.query_solr("21147668")
 
 
 def test_query_solr_missing_data_returns_empty(mock_get):
     mock_get.return_value.status_code = 200
     mock_get.return_value.json.return_value = {"success": False}
-    result = api.query_solr("38647188")
+    result = api.query_solr("21147668")
     assert result["numFound"] == 0
     assert result["docs"] == []
 
@@ -32,16 +32,16 @@ def test_query_solr_missing_data_returns_empty(mock_get):
 def test_upsert_jobs_keeps_cif(mock_post):
     mock_post.return_value.status_code = 200
     mock_post.return_value.json.return_value = {"success": True, "count": 1}
-    api.upsert_jobs([{"url": "u", "cif": "38647188"}])
+    api.upsert_jobs([{"url": "u", "cif": "21147668"}])
     sent = mock_post.call_args.kwargs["json"]
-    assert sent[0]["cif"] == "38647188"
+    assert sent[0]["cif"] == "21147668"
 
 
 def test_upsert_jobs_throws_on_http_error(mock_post):
     mock_post.return_value.status_code = 500
     mock_post.return_value.text = "boom"
     with pytest.raises(RuntimeError, match="500"):
-        api.upsert_jobs([{"url": "u", "cif": "38647188"}])
+        api.upsert_jobs([{"url": "u", "cif": "21147668"}])
 
 
 def test_delete_job_by_url(mock_delete):
@@ -66,16 +66,16 @@ def test_delete_job_by_url_throws_on_http_error(mock_delete):
 def test_upsert_company_keeps_id(mock_put):
     mock_put.return_value.status_code = 200
     mock_put.return_value.json.return_value = {"success": True}
-    api.upsert_company({"id": "38647188", "company": "E-INFRA S.A."})
+    api.upsert_company({"id": "21147668", "company": "CALLPOINT NEW EUROPE SRL"})
     sent = mock_put.call_args.kwargs["json"]
-    assert sent["id"] == "38647188"
+    assert sent["id"] == "21147668"
 
 
 def test_upsert_company_throws_on_http_error(mock_put):
     mock_put.return_value.status_code = 500
     mock_put.return_value.text = "boom"
     with pytest.raises(RuntimeError, match="500"):
-        api.upsert_company({"id": "38647188", "company": "E-INFRA S.A."})
+        api.upsert_company({"id": "21147668", "company": "CALLPOINT NEW EUROPE SRL"})
 
 
 def test_check_url_head(mock_head):
@@ -99,7 +99,7 @@ def test_check_url_redirect_invalid(mock_head):
     assert result["valid"] is False
 
 
-BOARD = "https://electrogrup.applytojob.com/apply/jobs/details/"
+BOARD = "https://www.ejobs.ro/user/locuri-de-munca/"
 
 
 def test_run_verification_read_only_by_default(monkeypatch, capsys):
@@ -114,7 +114,7 @@ def test_run_verification_read_only_by_default(monkeypatch, capsys):
     delete_mock = mock.Mock()
     monkeypatch.setattr(api, "delete_job_by_url", delete_mock)
 
-    api.run_verification("38647188")
+    api.run_verification("21147668")
 
     delete_mock.assert_not_called()
     assert "nothing deleted" in capsys.readouterr().out
@@ -136,7 +136,7 @@ def test_run_verification_delete_scoped_to_prefix(monkeypatch):
     delete_mock = mock.Mock()
     monkeypatch.setattr(api, "delete_job_by_url", delete_mock)
 
-    api.run_verification("38647188", delete=True, prefix=BOARD)
+    api.run_verification("21147668", delete=True, prefix=BOARD)
 
     assert delete_mock.call_count == 1
     assert delete_mock.call_args.args[0] == BOARD + "dead1"
@@ -151,6 +151,6 @@ def test_run_verification_delete_requires_prefix(monkeypatch):
     delete_mock = mock.Mock()
     monkeypatch.setattr(api, "delete_job_by_url", delete_mock)
 
-    api.run_verification("38647188", delete=True, prefix=None)
+    api.run_verification("21147668", delete=True, prefix=None)
 
     delete_mock.assert_not_called()
