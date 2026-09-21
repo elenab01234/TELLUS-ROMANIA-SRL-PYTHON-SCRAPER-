@@ -1,0 +1,6 @@
+{
+  "apiBase": "https://electrogrup.applytojob.com",
+  "apiPath": "/apply/jobs",
+  "department": "E-INFRA",
+  "jobDetailsPrefix": "https://electrogrup.applytojob.com/apply/jobs/details/"
+}

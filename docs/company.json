@@ -1,0 +1,16 @@
+{
+  "id": "38647188",
+  "company": "E-INFRA S.A.",
+  "brand": "E-INFRA",
+  "status": "activ",
+  "location": [
+    "Bucuresti"
+  ],
+  "website": [
+    "https://e-infra.ro"
+  ],
+  "career": [
+    "https://e-infra.ro/careers/"
+  ],
+  "scraperFile": "https://github.com/ale23yfm/e-infra-sa-python-scraper/actions/workflows/job-seeker-ro-spider.yml"
+}
