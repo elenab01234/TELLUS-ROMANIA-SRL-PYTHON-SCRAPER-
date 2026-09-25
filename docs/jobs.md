@@ -8,9 +8,15 @@
 | Brand | CALLPOINT NEW EUROPE |
 | Website | https://www.telusdigital.com/ |
 | Career | https://www.ejobs.ro/company/telus-digital/45016 |
-| LastScraped | 2026-09-24 |
+| LastScraped | 2026-09-25 |
 
-## Jobs (5)
+## Jobs (6)
+
+### Polish Customer Support Representative
+
+- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/polish-customer-support-representative/1989125](https://www.ejobs.ro/user/locuri-de-munca/polish-customer-support-representative/1989125)
+- **Location**: București
+- **Status**: scraped
 
 ### Croatian Customer Support Representative
 
@@ -43,4 +49,4 @@
 - **Status**: scraped
 
 ---
-_Generated at 2026-09-24T10:50:16Z_
+_Generated at 2026-09-25T10:53:54Z_
