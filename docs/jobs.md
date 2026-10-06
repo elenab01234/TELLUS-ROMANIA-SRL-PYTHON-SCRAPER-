@@ -8,9 +8,15 @@
 | Brand | CALLPOINT NEW EUROPE |
 | Website | https://www.telusdigital.com/ |
 | Career | https://www.ejobs.ro/company/telus-digital/45016 |
-| LastScraped | 2026-10-05 |
+| LastScraped | 2026-10-06 |
 
-## Jobs (5)
+## Jobs (6)
+
+### Finnish Customer Support Representative
+
+- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/finnish-customer-support-representative/99247511](https://www.ejobs.ro/user/locuri-de-munca/finnish-customer-support-representative/99247511)
+- **Location**: București
+- **Status**: scraped
 
 ### Slovenian Customer Support Representative
 
@@ -43,4 +49,4 @@
 - **Status**: scraped
 
 ---
-_Generated at 2026-10-05T13:09:10Z_
+_Generated at 2026-10-06T12:30:15Z_
