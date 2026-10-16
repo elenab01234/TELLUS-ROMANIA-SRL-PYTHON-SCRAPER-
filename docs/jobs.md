@@ -8,9 +8,15 @@
 | Brand | CALLPOINT NEW EUROPE |
 | Website | https://www.telusdigital.com/ |
 | Career | https://www.ejobs.ro/company/telus-digital/45016 |
-| LastScraped | 2026-10-15 |
+| LastScraped | 2026-10-16 |
 
-## Jobs (6)
+## Jobs (7)
+
+### German Customer Support Representative
+
+- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/german-customer-support-representative/99250020](https://www.ejobs.ro/user/locuri-de-munca/german-customer-support-representative/99250020)
+- **Location**: București
+- **Status**: scraped
 
 ### Finnish Customer Support Representative
 
@@ -49,4 +55,4 @@
 - **Status**: scraped
 
 ---
-_Generated at 2026-10-15T10:37:22Z_
+_Generated at 2026-10-16T10:24:12Z_
