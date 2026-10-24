@@ -8,9 +8,15 @@
 | Brand | CALLPOINT NEW EUROPE |
 | Website | https://www.telusdigital.com/ |
 | Career | https://www.ejobs.ro/company/telus-digital/45016 |
-| LastScraped | 2026-10-23 |
+| LastScraped | 2026-10-24 |
 
-## Jobs (8)
+## Jobs (5)
+
+### German Customer Support Representative
+
+- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/german-customer-support-representative/99250020](https://www.ejobs.ro/user/locuri-de-munca/german-customer-support-representative/99250020)
+- **Location**: București
+- **Status**: scraped
 
 ### B2B Customer Support Specialist with German
 
@@ -36,29 +42,5 @@
 - **Location**: București
 - **Status**: scraped
 
-### Croatian Customer Support Representative
-
-- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/croatian-customer-support-representative/1988608](https://www.ejobs.ro/user/locuri-de-munca/croatian-customer-support-representative/1988608)
-- **Location**: București
-- **Status**: scraped
-
-### Swedish Customer Support Representative
-
-- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/swedish-customer-support-representative/1988565](https://www.ejobs.ro/user/locuri-de-munca/swedish-customer-support-representative/1988565)
-- **Location**: București
-- **Status**: scraped
-
-### Dutch Customer Support Representative
-
-- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/dutch-customer-support-representative/1988544](https://www.ejobs.ro/user/locuri-de-munca/dutch-customer-support-representative/1988544)
-- **Location**: București
-- **Status**: scraped
-
-### German Customer Support Representative
-
-- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/german-customer-support-representative/99250020](https://www.ejobs.ro/user/locuri-de-munca/german-customer-support-representative/99250020)
-- **Location**: București
-- **Status**: scraped
-
 ---
-_Generated at 2026-10-23T10:46:33Z_
+_Generated at 2026-10-24T10:03:02Z_
