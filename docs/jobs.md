@@ -8,9 +8,21 @@
 | Brand | CALLPOINT NEW EUROPE |
 | Website | https://www.telusdigital.com/ |
 | Career | https://www.ejobs.ro/company/telus-digital/45016 |
-| LastScraped | 2026-11-03 |
+| LastScraped | 2026-11-04 |
 
 ## Jobs (4)
+
+### B2B Customer Support Specialist with German
+
+- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/b2b-customer-support-specialist-with-german/99251126](https://www.ejobs.ro/user/locuri-de-munca/b2b-customer-support-specialist-with-german/99251126)
+- **Location**: România
+- **Status**: scraped
+
+### Finnish Customer Support Representative
+
+- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/finnish-customer-support-representative/99247511](https://www.ejobs.ro/user/locuri-de-munca/finnish-customer-support-representative/99247511)
+- **Location**: București
+- **Status**: scraped
 
 ### Customer Support with Swedish & English (REMOTE)
 
@@ -25,17 +37,5 @@
 - **Location**: București
 - **Status**: scraped
 
-### B2B Customer Support Specialist with German
-
-- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/b2b-customer-support-specialist-with-german/99251126](https://www.ejobs.ro/user/locuri-de-munca/b2b-customer-support-specialist-with-german/99251126)
-- **Location**: România
-- **Status**: scraped
-
-### Finnish Customer Support Representative
-
-- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/finnish-customer-support-representative/99247511](https://www.ejobs.ro/user/locuri-de-munca/finnish-customer-support-representative/99247511)
-- **Location**: București
-- **Status**: scraped
-
 ---
-_Generated at 2026-11-03T13:21:02Z_
+_Generated at 2026-11-04T13:32:27Z_
