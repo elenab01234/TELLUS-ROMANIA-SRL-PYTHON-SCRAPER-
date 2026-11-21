@@ -8,7 +8,7 @@
 | Brand | CALLPOINT NEW EUROPE |
 | Website | https://www.telusdigital.com/ |
 | Career | https://www.ejobs.ro/company/telus-digital/45016 |
-| LastScraped | 2026-11-20 |
+| LastScraped | 2026-11-21 |
 
 ## Jobs (2)
 
@@ -26,4 +26,4 @@
 - **Status**: scraped
 
 ---
-_Generated at 2026-11-20T14:40:45Z_
+_Generated at 2026-11-21T13:57:04Z_
