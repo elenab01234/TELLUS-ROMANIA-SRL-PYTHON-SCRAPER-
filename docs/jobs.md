@@ -8,9 +8,9 @@
 | Brand | CALLPOINT NEW EUROPE |
 | Website | https://www.telusdigital.com/ |
 | Career | https://www.ejobs.ro/company/telus-digital/45016 |
-| LastScraped | 2026-11-24 |
+| LastScraped | 2026-11-25 |
 
-## Jobs (2)
+## Jobs (1)
 
 ### Customer Support with Swedish & English (REMOTE)
 
@@ -19,11 +19,5 @@
 - **Work Mode**: remote
 - **Status**: scraped
 
-### AGENT SERVICII CLIENT
-
-- **URL**: [https://mediere.anofm.ro/app/module/mediere/job/3451693](https://mediere.anofm.ro/app/module/mediere/job/3451693)
-- **Location**: România
-- **Status**: scraped
-
 ---
-_Generated at 2026-11-24T16:46:01Z_
+_Generated at 2026-11-25T16:33:46Z_
