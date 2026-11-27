@@ -8,9 +8,15 @@
 | Brand | CALLPOINT NEW EUROPE |
 | Website | https://www.telusdigital.com/ |
 | Career | https://www.ejobs.ro/company/telus-digital/45016 |
-| LastScraped | 2026-11-26 |
+| LastScraped | 2026-11-27 |
 
-## Jobs (1)
+## Jobs (2)
+
+### Chat & Email Support with English & Romanian (work from office)
+
+- **URL**: [https://www.ejobs.ro/user/locuri-de-munca/chat-email-support-with-english-romanian-work-from-office/99278111](https://www.ejobs.ro/user/locuri-de-munca/chat-email-support-with-english-romanian-work-from-office/99278111)
+- **Location**: București
+- **Status**: scraped
 
 ### Customer Support with Swedish & English (REMOTE)
 
@@ -20,4 +26,4 @@
 - **Status**: scraped
 
 ---
-_Generated at 2026-11-26T16:06:02Z_
+_Generated at 2026-11-27T15:53:51Z_
